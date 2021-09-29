@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import request from 'superagent'
-import Loader from 'react-loader-spinner';
-import CharacterDetails from './CharacterDetails.js'
 import { NavLink } from 'react-router-dom'
+import Header from './Header.js'
 
 
 export default class DetailsPage extends Component {
@@ -13,12 +12,14 @@ export default class DetailsPage extends Component {
 
     componentDidMount = async () =>{
         const response = await request.get(`https://halloweencharacters.herokuapp.com/halloween-characters/${this.props.match.params.id}`)
+        console.log(response)
         this.setState({character: response.body})
     }
     render() {
         console.log(this.state.character)
         return (
             <>
+            <Header/>
             <header>
                 <NavLink
                 to="/"
@@ -31,17 +32,10 @@ export default class DetailsPage extends Component {
                 </NavLink>
               </header>
             <div>
-                <p>Welcome to detail page for {this.state.character.character}</p>
+                <p>Welcome to detail page for {this.state.character.name}</p>
                 <p>Movie: {this.state.character.movie}</p>
-                <p>{this.state.character.image}</p>
+                <img alt={this.state.character.image} src={this.state.character.image} />
             </div>
-             <ul>
-             {
-                 this.state.isLoading
-                 ? <Loader type="Circles" color="##f60000" height={80} width={80}/>
-                 :<CharacterDetails filteredPokes={this.state.character}/>
-             }
-         </ul>
          </>
         )
     }

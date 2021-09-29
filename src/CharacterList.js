@@ -9,8 +9,8 @@ class CharacterList extends React.Component {
                  {
                 this.props.filteredCharacters.map(character => 
                 (<CharacterItem 
-                key = {character._id}
-                id= {character._id}
+                key = {character.id}
+                id= {character.id}
                 image = {character.image}
                 movie = {character.movie}/>
                 ))} 

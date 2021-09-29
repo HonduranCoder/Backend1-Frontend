@@ -12,15 +12,7 @@ export default class Header extends Component {
             <div className = "pic">
             <img src={halloween} width="100" height="100" alt ="Halloween"/>
             </div>
-            <NavLink
-                to="./search"
-                activeStyle={{
-                fontWeight: "bold",
-                color: "red", 
-            }}
-            >
-            Go to Search Page
-                </NavLink>
+        
             </>  
         )
     }

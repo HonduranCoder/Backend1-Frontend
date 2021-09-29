@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import SearchPage from './SearchPage.js'
 import DetailsPage from './DetailsPage'
-import HomePage from './HomePage.js'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import './App.css'
 
@@ -10,15 +9,10 @@ export default class App extends Component {
     return (
       <Router>
       <div>
-        <h2>Pokedex</h2>
+        <h2>Stay Out of The Forest</h2>
         <Switch>
-          <Route 
-            path="/" 
-            exact
-            render={(routerProps) => <HomePage {...routerProps} />} 
-          />  
            <Route 
-            path="/search" 
+            path="/" 
             exact
             render={(routerProps) => <SearchPage {...routerProps} />} 
           />   
