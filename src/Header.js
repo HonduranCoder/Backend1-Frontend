@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import halloween from './halloween.jpeg'
-import { NavLink } from 'react-router-dom'
 
 export default class Header extends Component {
     render() {
