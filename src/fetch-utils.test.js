@@ -11,10 +11,9 @@ test('Halloween Characters', async()=>{
     expect(response[0]).toEqual(expectation)
 }) 
 
-//failing
 test('Halloween Characters-one', async()=>{
     const expectation ={
-      id:1, 
+        id:1, 
         image: expect.any(String),
         name: expect.any(String), 
         movie:expect.any(String), 
