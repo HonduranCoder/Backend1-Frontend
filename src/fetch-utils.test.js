@@ -6,6 +6,7 @@ test('Halloween Characters', async()=>{
         image: expect.any(String),
         name: expect.any(String), 
         movie: expect.any(String),
+        
     }
     const response = await getHalloweenCharacters(); 
     expect(response[0]).toEqual(expectation)
@@ -13,10 +14,12 @@ test('Halloween Characters', async()=>{
 
 test('Halloween Characters-one', async()=>{
     const expectation ={
-        id:1, 
+        id: expect.any(Number), 
         image: expect.any(String),
         name: expect.any(String), 
         movie:expect.any(String), 
+        category_id: expect.any(Number), 
+        owner_id: expect.any(Number)
     }; 
     const response = await getHalloweenCharacter(1); 
     expect(response).toEqual(expectation)

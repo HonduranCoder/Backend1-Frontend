@@ -1,35 +1,22 @@
 import React, { Component } from 'react'
-import request from 'superagent'
-import { NavLink } from 'react-router-dom'
-import Header from './Header.js'
-import { editHalloweenCharacter, getCategories, deleteHalloweenCharacter, getHalloweenCharacter, getHalloweenCharacters } from './fetch-utils.js'
+import { createHalloweenCharacters, getCategories } from './fetch-utils.js'
 
-
-export default class DetailsPage extends Component {
+export default class CreatePage extends Component {
     state ={
-        character: {},   
         id: '',
         categories:[], 
         name:'', 
         movie:'',
-        category_id:1,
-        isLoading: false,
+        category_id:1,  
+
     }
 
-    componentDidMount = async () =>{
-        const response = await getHalloweenCharacter(this.props.match.params.id)
-        console.log(response)
-        this.setState({character: response})
+    componentDidMount = async () => {
         const categories = await getCategories()
         this.setState({ categories: categories })
     }
 
-    handleDelete = async () => {
-        await deleteHalloweenCharacter(this.props.match.params.id)
-        this.props.history.push('/')
-    }
-
-    handleUpdate = async e =>{
+    handleSubmit = async e =>{
         e.preventDefault(); 
         const newCharacter = {
             name: this.state.name,
@@ -37,28 +24,15 @@ export default class DetailsPage extends Component {
             category_id:this.state.category_id, 
             image: this.state.image
         }
-        await editHalloweenCharacter(this.props.match.params.id, newCharacter)
-        this.props.history.push('/')
+        await createHalloweenCharacters(newCharacter)
+        //console.log(newCharacter)
+        //this.props.history.push('/')
     }
 
-    // add a from with dropdown like create page form 
     render() {
-        console.log(this.state)
         return (
-            <>
-            <Header/>
-            <header>
-                <NavLink
-                to="/"
-                activeStyle={{
-                fontWeight: "bold",
-                color: "red"
-            }}
-            >
-            Home
-                </NavLink>
-              </header>
-              <form onSubmit={this.handleUpdate}>
+            <div>
+                  <form onSubmit={this.handleSubmit}>
                     <label>
                         Name:
                         <input onChange={(e) => this.setState({ name: e.target.value })} />
@@ -81,16 +55,10 @@ export default class DetailsPage extends Component {
                         <input onChange={(e) => this.setState({ movie: e.target.value })} type="input" />
                     </label>
                     <button>
-                        Update
+                        Create
                     </button>
                 </form>
-            <div>
-                <p>Welcome to detail page for {this.state.character.name}</p>
-                <p>Movie: {this.state.character.movie}</p>
-                <img alt={this.state.character.image} src={this.state.character.image} />
             </div>
-            <button onClick = {this.handleDelete}> Delete </button>
-         </>
         )
     }
 }
